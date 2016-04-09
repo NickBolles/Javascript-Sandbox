@@ -1,0 +1,30 @@
+<md-toolbar ng-animate-ref="{{MT.newId}}" class="md-tall">
+    Current Id is {{MT.newId}}
+</md-toolbar>
+<md-content layout-fill >
+    <md-list>
+        <md-list-item ng-repeat="id in MT.items"
+                      ng-animate-ref="{{id}}"
+                      ui-sref="materialtransitions({newId: '{{id}}', oldId: '{{MT.newId}}', idx: '{{$index}}'})"
+                      md-ink-explode="#rippletest"
+                      md-ink-explode-dur="750"
+                      md-ink-explode-color="rgb(255,255,255)">
+            Go to next state with id {{id}}
+        </md-list-item>
+    </md-list>
+    <div flex>
+        <md-grid-list md-cols="{{MT.animatedNum/2}}" md-row-height="1:1" >
+            <md-grid-tile ng-animate-ref="{{MT.newId}}-{{$index}}" ng-repeat="i in MT.animated" ng-style="MT.newStyles[$index]">
+                <!--{{MT.newId}}-->
+            </md-grid-tile>
+        </md-grid-list>
+        <md-grid-list md-cols="{{MT.animatedNum/3}}" md-row-height="2:1" >
+            <div ng-repeat-start="i in MT.animated" ng-init="idx=$index"></div>
+                <md-grid-tile ng-repeat="id in MT.items" ng-init="style=MT.getRandomStyle(); index=idx"
+                              ng-animate-ref="{{id}}-{{index}}" ng-style="style">
+                    <!--{{id}}-->
+                </md-grid-tile>
+            <div ng-if="false" ng-repeat-end></div>
+        </md-grid-list>
+    </div>
+</md-content>

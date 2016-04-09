@@ -1,0 +1,75 @@
+body {
+  background: #D3D3D3;
+  color: #434343;
+  h1 {
+    color: #333333;
+  }
+}
+
+$transition-state-time: .25s;
+$transition-anchor-time: .5s;
+//$transition-state-time: 2.5s;
+//$transition-anchor-time: 5s;
+/* Animations */
+// Copied from angular material for consistency
+//use swift-ease-out for incoming elements
+$swift-ease-out-duration: 0.4s !default;
+$swift-ease-out-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
+$swift-ease-out: all $swift-ease-out-duration $swift-ease-out-timing-function !default;
+
+//use swift-ease-in for outgoing elements
+$swift-ease-in-duration: 0.3s !default;
+$swift-ease-in-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2) !default;
+$swift-ease-in: all $swift-ease-in-duration $swift-ease-in-timing-function !default;
+
+//use swift-ease-in for elements staying in field of view
+$swift-ease-in-out-duration: 0.5s !default;
+$swift-ease-in-out-timing-function: cubic-bezier(0.35, 0, 0.25, 1) !default;
+$swift-ease-in-out: all $swift-ease-in-out-duration $swift-ease-in-out-timing-function !default;
+
+$swift-linear-duration: 0.08s !default;
+$swift-linear-timing-function: linear !default;
+$swift-linear: all $swift-linear-duration $swift-linear-timing-function !default;
+//END Copied from angular material for consistency
+
+
+ui-view{
+  position:absolute;
+  left:0;
+  right:0;
+  &.ng-leave{
+    opacity: 1;
+    transition:all $transition-state-time $swift-ease-out-timing-function;
+  }
+  &.ng-leave-active{
+    //opacity:0;
+  }
+  &.ng-enter{
+    opacity: 0;
+    transition:all $transition-state-time $swift-ease-out-timing-function;
+    transition-delay: $transition-state-time+$transition-anchor-time;
+  }
+  &.ng-enter-active{
+    opacity:1;
+  }
+}
+
+md-grid-tile.ng-anchor{
+  padding-top:0 !important;
+}
+.ng-anchor{
+  transition: $transition-anchor-time $swift-ease-in-out-timing-function all;
+  z-index: 1001 !important;
+  position: absolute !important;
+}
+.ng-anchor.ng-anchor-in {
+  transition-duration: $transition-anchor-time;
+}
+.ng-anchor.ng-anchor-out {
+  transition-duration: $transition-state-time;
+  //transition-duration: 0.1s;
+}
+
+.md-ripple-explode{
+  z-index: 1000;
+}
