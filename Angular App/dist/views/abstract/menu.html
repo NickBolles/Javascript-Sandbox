@@ -1,0 +1,33 @@
+
+<md-content ng-controller="SidebarCtrl as sc" layout-fill layout="row">
+    <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
+                md-component-id="left"
+                aria-label="Show User List"
+                md-is-locked-open="$mdMedia('gt-sm')">
+
+        <md-toolbar class="md-tall md-primary" layout="column" layout-align="center center">
+            <h1 class="md-title">Tests</h1>
+        </md-toolbar>
+
+        <md-list>
+            <md-list-item ng-repeat="test in sc.tests">
+                <md-button ui-sref="{{test.url || ''}}" ng-class="{'selected' : test === sc.selected }">
+                    {{test.name}}
+                </md-button>
+            </md-list-item>
+        </md-list>
+
+    </md-sidenav>
+    <md-content tabIndex="-1" role="main" class="md-whiteframe-z2 menu-content layout-fill ui-view-container" >
+        <md-toolbar layout="row" layout-align="start center">
+            <div ng-animate-ref="header"></div>
+            <md-button class="icon" ng-click="sc.openMenu();">
+                Menu
+            </md-button>
+            <h1 flex class="md-title">{{header.title}}</h1>
+        </md-toolbar>
+        <md-content id="rippletest" layout-fill>
+            <ui-view layout="column" flex></ui-view>
+        </md-content>
+    </md-content>
+</md-content>
